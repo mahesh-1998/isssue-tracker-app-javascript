@@ -1,0 +1,55 @@
+body{
+
+    align-items: center;
+}
+
+.nav {
+
+    margin : 20px;
+}
+
+.jumbotron
+{
+    width: 30%;
+    float: left;
+}
+
+.result
+{
+    float: right;
+}
+
+.search
+{
+    width: 180px;
+    margin: 10x;
+}
+
+.btn,a {
+
+    margin: 10px;
+}
+
+
+
+.card
+{
+  
+  margin: 10px;
+  float: left;
+  border: 1px solid;
+  padding: 10px;
+  background-color: gainsboro;
+  border-radius: 10px;
+  
+}
+
+
+#search-issue
+{
+    width: 80%;
+    height: 40px;
+    
+    
+  
+}
