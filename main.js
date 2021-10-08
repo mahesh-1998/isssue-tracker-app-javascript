@@ -5,7 +5,9 @@ document.getElementById('issueInputForm').addEventListener('submit', saveIssue);
 // Event Listeners function for Search button
 document.getElementById('form-search').addEventListener('submit', filterIssues);
 
-// Genearet uniquie issueId 
+
+
+// Generate unique issueId 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0,
@@ -56,7 +58,7 @@ function saveIssue(e) {
 function setStatus(id) {
 
     console.log("Inside setStatus()")
-    var action = document.getElementById("action").value;
+    var action = document.getElementById(id).value;
     console.log("id: ", id)
     console.log("action: ", action)
     var issues = JSON.parse(localStorage.getItem('issues'));
@@ -112,17 +114,18 @@ function setIssue(list, issue) {
                                   <p><span class="glyphicon glyphicon-time"></span> Severity: ${issue.severity}  </p>
                                   <p><span class="glyphicon glyphicon-user"></span>  Assigned To: ${issue.assignedTo}  </p>
                                   <p><span class="glyphicon glyphicon-calendar"></span>  Opened Date: ${issue.openedDate}  </p>
-                                  <select class="form-control" id="action" onchange="setStatus(\'${issue.id}'\)" >
+                                  <select class="form-control" id="${issue.id}" onchange="setStatus(\'${issue.id}'\)" >
+                                    <option >Choose Status</option>
                                     <option value='Open'>Open</option>
                                     <option value='Close'>Close</option>
                                     <option value='Hold'>Hold</option>
                                   </select>
-                                  <button id="delete-btn"onclick="deleteIssue(\'${issue.id}'\)" class="btn btn-danger">Delete</button>
+                                  <button id="delete-btn-${issue.id}" onclick="deleteIssue(\'${issue.id}'\)" class="btn btn-danger">Delete</button>
                                 </div>
                               </div>`;
     if (issue.status === 'Hold')
-        var btn = document.getElementById('delete-btn')
-    if (btn != null) btn.disabled = true;
+        var btn = document.getElementById(`delete-btn-${issue.id}`)
+    if (btn != null) btn.style.display="none";
 
 }
 
@@ -156,7 +159,7 @@ function filterIssues(e) {
     console.log("issues:", issues);
     console.log("issueList:", issuesList);
 
-    var searchText = document.getElementById('search-issue').value;
+    var searchText = document.getElementById('search-issue').value.toLowerCase();
     var severity = document.getElementById('search-severity').value;
     var startDate = document.getElementById('search-start-date').value;
     var endDate = document.getElementById('search-end-date').value;
@@ -166,15 +169,28 @@ function filterIssues(e) {
     console.log("startDate", startDate);
     console.log("endDate", endDate);
 
+
+
     issues = issues.filter((issue) => {
 
-        if ((severity.length > 0 && String(issue.severity).includes(severity)) || (searchText.length > 0 && String(issue).includes(searchText)) ||
-            (searchText.length > 0 && String(issue.assignedTo).includes(searchText) ||
-                (Date.parse(issue.openedDate) >= Date.parse(startDate) && Date.parse(issue.openedDate) <= Date.parse(endDate))
-            )
-        ) {
+    console.log((searchText.length > 0 && String(issue.description).includes(searchText)))
+    console.log("endDate", endDate);
+        if (
+            (severity.length > 0 && String(issue.severity).includes(severity)) 
+            || 
+            (searchText.length > 0 && String(issue.description).toLowerCase().includes(searchText)) 
+            ||
+            (searchText.length > 0 && String(issue.assignedTo).toLowerCase().includes(searchText) 
+            || 
+            (searchText.length > 0 && String(issue.id).toLowerCase().includes(searchText))
+            ||   
+            (Date.parse(issue.openedDate) >= Date.parse(startDate) && Date.parse(issue.openedDate) <= Date.parse(endDate)))
+            ) 
+            {
+
             return issue;
-        }
+
+            }
 
     }).sort((a, b) => Date.parse(a.openedDate) - Date.parse(b.openedDate));
 

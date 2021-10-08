@@ -3,10 +3,13 @@ body{
     align-items: center;
 }
 
-.nav {
+.navbar,.row,.navbar.a {
 
-    margin : 20px;
+    margin : 5px;
+    text-align: center;
 }
+
+
 
 .jumbotron
 {
@@ -41,6 +44,7 @@ body{
   padding: 10px;
   background-color: gainsboro;
   border-radius: 10px;
+  width: 210px;
   
 }
 
