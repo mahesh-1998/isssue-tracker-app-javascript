@@ -11,9 +11,8 @@ body{
 
 
 
-.jumbotron
+.jumbotron,.query
 {
-    width: 30%;
     float: left;
 }
 
