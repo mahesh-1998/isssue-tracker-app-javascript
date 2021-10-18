@@ -1,4 +1,4 @@
-# isssue-tracker-app-javascript [View Site](https://issue-tracker.neocities.org/)
+# isssue-tracker-app-javascript [View Site](https://mahesh-1998.github.io/isssue-tracker-app-javascript/)
 <img class="project-logo" href="(https://issue-tracker.neocities.org/" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/bug-tracking-6-1093037.png" style="filter: invert(1);" width="50" height="50" alt=""/>
 An Issue Tracker with ability to Describe the issue with a severity and can be assigned to resource.
              
